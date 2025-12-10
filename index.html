@@ -1,0 +1,45 @@
+<!-- واجهة إدخال سريعة - يمكن استضافتها محلياً -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>إدخال مشتري جديد</title>
+    <style>
+        body { font-family: Arial; direction: rtl; padding: 20px; }
+        input, button { margin: 5px; padding: 10px; width: 300px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>إضافة مشتري جديد</h2>
+    <input type="text" id="name" placeholder="اسم المشتري">
+    <input type="text" id="phone" placeholder="رقم الواتساب (مثال: 966501234567)">
+    <input type="email" id="email" placeholder="البريد الإلكتروني (اختياري)">
+    <input type="text" id="amount" placeholder="المبلغ المدفوع">
+    <button onclick="addCustomer()">إضافة وإرسال الرابط</button>
+    <div id="result"></div>
+
+    <script>
+        async function addCustomer() {
+            const customer = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                amount: document.getElementById('amount').value
+            };
+
+            const response = await fetch('/api/add-customer', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(customer)
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerHTML = 
+                result.success ? 
+                `<span class="success">✅ تم الإرسال لـ ${customer.phone}</span>` :
+                `<span class="error">❌ خطأ: ${result.error}</span>`;
+        }
+    </script>
+</body>
+</html>
