@@ -1,4 +1,7 @@
-﻿altgraph==0.17.4
+flask
+gunicorn
+requests
+altgraph==0.17.4
 annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.11.0
@@ -98,4 +101,5 @@ websockets==15.0.1
 Werkzeug==3.1.3
 wsproto==1.2.0
 zopfli==0.2.3.post1
+
 
